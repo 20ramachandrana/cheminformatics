@@ -1,0 +1,45 @@
+    <html>
+    <head>
+    <script>
+        var arr;
+      var allText;
+  function readTextFile(file) {
+    var rawFile = new XMLHttpRequest(); // XMLHttpRequest (often abbreviated as XHR) is a browser object accessible in JavaScript that provides data in XML, JSON, but also HTML format, or even a simple text using HTTP requests.
+    rawFile.open("GET", file, false); // open with method GET the file with the link file ,  false (synchronous)
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4) // readyState = 4: request finished and response is ready
+        {
+            if(rawFile.status === 200) // status 200: "OK"
+            {  
+                allText = rawFile.responseText; //  Returns the response data as a string
+                arr = allText.split("\n");
+            }
+        }
+    }
+    rawFile.send(null); //Sends the request to the server Used for GET requests with param null
+}
+    function submit(){
+        var cmpd = document.getElementById("compound").value;
+        if (cmpd == ""){
+            alert("please submit a compound");
+        }
+     else{
+       for (var i = 0; i < cmpd.length; i++){
+           if(cmpd.charAt(i).toLowerCase() != cmpd.charAt(i).toUpperCase() && cmpd.charAt(i).isLettecmpd.charAt(i).toUpperCase() == cmpd.charAt(i)){
+               alert("issa capital my dude");
+           }
+        }
+    }
+    }
+    </script>
+    </head>
+    <body onload = 'readTextFile("n.txt")'>
+        <h1>Molar Mass Calculator</h1>
+      <input id="compound" size = "100"placeholder="What's the compound you need the molar mass for?" type="text">
+      <button onclick = 'submit()'>Get Molar Mass</button>
+    <div id='output'>
+
+    </div>
+    </body>
+    </html>
