@@ -49,7 +49,6 @@
         if (cmpd == ""){
             alert("please submit a compound");
             quit = true;
-            document.getElementById("output").textContent+= NaN;
         }
      else{
          var elements = [];
@@ -119,7 +118,6 @@
               if (i+w == cmpd.length){
                   alert("invalid syntax :(");
                   quit = true;
-                  document.getElementById("output").textContent += NaN;
               }
               else {
               for (var k = 0; k < w; k++){
@@ -197,7 +195,6 @@
             else {
                 alert("invalid syntax :(");
                 quit = true;
-                document.getElementById("output").textContent += NaN;
             }
        }
          var sum = 0;
@@ -211,7 +208,6 @@
              if (z==arr.length){
                  quit = true;
                   alert("invalid syntax :(");
-                document.getElementById("output").textContent += NaN;
                  break;
              }
                     var x = arr[z].split(",");
@@ -220,6 +216,9 @@
      if(!quit){
     document.getElementById("output").textContent += sum;
      }
+         else {
+             document.getElementById("output").textContent+= NaN;
+         }
     }
     }
     
