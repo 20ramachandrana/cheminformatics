@@ -1,5 +1,28 @@
     <html>
     <head>
+        <style>
+    body {background-color: #2fafd0;}
+    h1, div {
+        font-family: monospace;
+            color: yellow;    
+            }
+            h1 {
+                font-size: 60;
+            }
+            div {
+                font-size: 40;
+            }
+            input {
+                font-family: monospace;
+            background-color: yellow;    
+                font-size: 20;
+            }
+            button {
+                font-family: monospace;
+            background-color: yellow;
+                font-size: 20;
+            }
+        </style>
     <script>
         var arr;
       var allText;
@@ -20,26 +43,224 @@
     rawFile.send(null); //Sends the request to the server Used for GET requests with param null
 }
     function submit(){
+         document.getElementById("output").textContent = "THE MOLAR MASS IS: ";
         var cmpd = document.getElementById("compound").value;
+         var quit = false;
         if (cmpd == ""){
             alert("please submit a compound");
+            quit = true;
+            document.getElementById("output").textContent+= NaN;
         }
      else{
+         var elements = [];
+         var frequency  = [];
+         var j = 0;
        for (var i = 0; i < cmpd.length; i++){
-           if(cmpd.charAt(i).toLowerCase() != cmpd.charAt(i).toUpperCase() && cmpd.charAt(i).isLettecmpd.charAt(i).toUpperCase() == cmpd.charAt(i)){
-               alert("issa capital my dude");
+           if(isACapital(cmpd.charAt(i))){
+              if (i != cmpd.length - 1){
+                  if(isLower(cmpd.charAt(i+1))){
+                      i++;
+                      if(i!=cmpd.length - 1){
+                          if(isNumber(cmpd.charAt(i+1))){
+                            var w = 1;
+                              while (i+w < cmpd.length && isNumber(cmpd.charAt(i+w))) {
+                                  w++;
+                              }
+                            var f = parseInt(cmpd.substr(i+1, w-1));
+                              elements[j] = cmpd.substr(i-1,2);
+                              frequency[j] = f;
+                              console.log(elements);
+                          console.log(frequency);
+                              j++;
+                              i+=w-1;
+                          }
+                      
+                      else {
+                          elements[j] = cmpd.substr(i-1,2);
+                        frequency[j] = 1;
+                          console.log(elements);
+                          j++;
+                      }
+                      }
+                      else {
+                          elements[j] = cmpd.substr(i-1,2);
+                        frequency[j] = 1;
+                          console.log(elements);
+                          j++;
+                      }
+                  }
+                else if(isNumber(cmpd.charAt(i+1))){
+                            var w = 1;
+                              while (i+w < cmpd.length && isNumber(cmpd.charAt(i+w))) {
+                                  w++;
+                              }
+                            var f = parseInt(cmpd.substr(i+1, w-1));
+                              elements[j] = cmpd.charAt(i);
+                              frequency[j] = f;
+                              console.log(elements);
+                          console.log(frequency);
+                    i+=w-1;
+                    j++;
+                          }
+                else {
+                          elements[j] = cmpd.charAt(i);
+                        frequency[j] = 1;
+                          console.log(elements);
+                 console.log(frequency);
+                j++;
+                      }   
+              }
+            else {
+               elements[j] = cmpd.charAt(i);
+            frequency[j] = 1;
+                console.log(elements);
+                 console.log(frequency);
+            j++;
            }
-        }
+           }
+          else  if(cmpd.charAt(i)=='('){
+                var w= 1;
+              var a = [];
+              var b = [];
+              var num = 0;
+              while (i+w < cmpd.length && cmpd.charAt(i+w) != ')'){
+                w++;
+              }
+              if (i+w == cmpd.length){
+                  alert("invalid syntax :(");
+                  quit = true;
+                  document.getElementById("output").textContent += NaN;
+              }
+              else {
+              for (var k = 0; k < w; k++){
+                if(isACapital(cmpd.charAt(i+k))){
+                if (i+k != cmpd.length - 1){
+                  if(isLower(cmpd.charAt(i+k+1))){
+                      i++;
+                      if(i!=cmpd.length - 1){
+                          if(isNumber(cmpd.charAt(i+k+1))){
+                            var x = 1;
+                              while (i+k+x < cmpd.length && isNumber(cmpd.charAt(i+k+x))) {
+                                  x++;
+                              }
+                            var f = parseInt(cmpd.substr(i+k+1, x-1));
+                              console.log(f);
+                              a[num] = cmpd.substr(i+k+x-1,2);
+                              b[num] = f;
+                              num++;
+                              k+=x-1;
+                          }
+                          else {
+                          a[num] = cmpd.substr(i+k-1,2);
+                        b[num] = 1;
+                          num++;
+                      }
+                      }
+                      else {
+                          a[num] = cmpd.substr(i+k-1,2);
+                        b[num] = 1;
+                          num++;
+                      }
+                  }
+                else if(isNumber(cmpd.charAt(i+k+1))){
+                            var x = 1;
+                              while (i+k+x < cmpd.length && isNumber(cmpd.charAt(i+k+x))) {
+                                  x++;
+                              }
+                            var f = parseInt(cmpd.substr(i+k+1, x-1));
+                              a[num] = cmpd.charAt(i+k);
+                              b[num] = f;
+                    k+=x-1;
+                    num++;
+                          }
+                else {
+                          a[num] = cmpd.charAt(i+k);
+                        b[num] = 1;
+                          console.log(a);
+                
+                num++;
+                    
+                      }   
+              }
+}
+}    
+              j+=num;
+                  i+=w+1;
+                 if(i!=cmpd.length-2 && isNumber(cmpd.charAt(i))){
+                            var x = 0;
+                              while (i+x< cmpd.length && isNumber(cmpd.charAt(i+x))) {
+                                 x++;
+                              }
+                            var f = parseInt(cmpd.substr(i, x));
+                            for (var ooo = 0; ooo<b.length; ooo++){
+                                b[ooo]*=f;
+                            }
+                              
+                          }
+                     elements= elements.concat(a);
+                frequency=  frequency.concat(b);    
+                      console.log(frequency);
+                      }
+                      
+                      
+              
+              }
+              
+            
+            else {
+                alert("invalid syntax :(");
+                quit = true;
+                document.getElementById("output").textContent += NaN;
+            }
+       }
+         var sum = 0;
+         for (var w = 0; w < elements.length; w++){
+             var str = elements[w];
+             str+= ",";
+             var z = 0;
+             while (z < arr.length && arr[z].indexOf(str) == -1){
+                 z++;
+             }
+             if (z==arr.length){
+                 quit = true;
+                  alert("invalid syntax :(");
+                document.getElementById("output").textContent += NaN;
+                 break;
+             }
+                    var x = arr[z].split(",");
+             sum+=x[2]*frequency[w];
+         }
+     if(!quit){
+    document.getElementById("output").textContent += sum;
+     }
     }
+    }
+    
+    function isACapital(c){
+        return isLetter(c) && c.toUpperCase() == c;
+    }
+    function isLower(c){
+        return isLetter(c) && c.toUpperCase() != c;
+    }
+    function isLetter(c){
+        return c.toLowerCase() != c.toUpperCase();
+    }
+    function isNumber(c){
+        return !isNaN(c) && c >= 0;
     }
     </script>
     </head>
     <body onload = 'readTextFile("https://raw.githubusercontent.com/20ramachandrana/cheminformatics/master/n.txt")'>
         <h1>Molar Mass Calculator</h1>
-      <input id="compound" size = "100"placeholder="What's the compound you need the molar mass for?" type="text">
+      <input id="compound" size = "50"placeholder="What's the compound you need the molar mass for?" type="text">
+        <br>
+        <br>
+        <br>
       <button onclick = 'submit()'>Get Molar Mass</button>
+         <br>
+        <br>
+        <br>
     <div id='output'>
-
     </div>
     </body>
     </html>
