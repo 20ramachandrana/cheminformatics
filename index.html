@@ -1,4 +1,4 @@
-    <html>
+     <html>
     <head>
         <style>
     body {background-color: #2fafd0;}
@@ -69,8 +69,6 @@
                             var f = parseInt(cmpd.substr(i+1, w-1));
                               elements[j] = cmpd.substr(i-1,2);
                               frequency[j] = f;
-                              console.log(elements);
-                          console.log(frequency);
                               j++;
                               i+=w-1;
                           }
@@ -78,14 +76,12 @@
                       else {
                           elements[j] = cmpd.substr(i-1,2);
                         frequency[j] = 1;
-                          console.log(elements);
                           j++;
                       }
                       }
                       else {
                           elements[j] = cmpd.substr(i-1,2);
                         frequency[j] = 1;
-                          console.log(elements);
                           j++;
                       }
                   }
@@ -97,24 +93,18 @@
                             var f = parseInt(cmpd.substr(i+1, w-1));
                               elements[j] = cmpd.charAt(i);
                               frequency[j] = f;
-                              console.log(elements);
-                          console.log(frequency);
                     i+=w-1;
                     j++;
                           }
                 else {
                           elements[j] = cmpd.charAt(i);
                         frequency[j] = 1;
-                          console.log(elements);
-                 console.log(frequency);
                 j++;
                       }   
               }
             else {
                elements[j] = cmpd.charAt(i);
             frequency[j] = 1;
-                console.log(elements);
-                 console.log(frequency);
             j++;
            }
            }
@@ -144,7 +134,6 @@
                                   x++;
                               }
                             var f = parseInt(cmpd.substr(i+k+1, x-1));
-                              console.log(f);
                               a[num] = cmpd.substr(i+k+x-1,2);
                               b[num] = f;
                               num++;
@@ -176,7 +165,6 @@
                 else {
                           a[num] = cmpd.charAt(i+k);
                         b[num] = 1;
-                          console.log(a);
                 
                 num++;
                     
@@ -199,7 +187,6 @@
                           }
                      elements= elements.concat(a);
                 frequency=  frequency.concat(b);    
-                      console.log(frequency);
                       }
                       
                       
